@@ -28,29 +28,16 @@
               <a class="dropdown-list-item container" href="brands/Artistica/index.html">Artistica</a>
               <a class="dropdown-list-item container" href="brands/Baker/index.html">Baker</a>
               <a class="dropdown-list-item container" href="brands/Noir/index.html">Noir</a>
-              <a class="dropdown-list-item container" href="brands/Trs/index.html">Trs</a>
               <a class="dropdown-list-item container" href="brands/Knowlton/index.html">Knowlton</a>
-              <a class="dropdown-list-item container" href="brands/Loloi/index.html">Loloi</a>
-              <a class="dropdown-list-item container" href="brands/WoodBridge/index.html">WoodBridge</a>
-              <a class="dropdown-list-item container" href="brands/Nuevo/index.html">Nuevo</a>
               <a class="dropdown-list-item container" href="brands/Interlude Home/index.html">Interlude-home</a>
-            </div>
-          </div>
-        </div>
-        <div class="nav-item my-dropdown">
-          <a href="furnitures.html">Furnitures</a>
-          <div class="my-dropdown-container">
-            <div class="dropdown-list">
-              <a class="dropdown-list-item container" href="brands/Interlude Home/index.html">Home Decors</a>
-              <a class="dropdown-list-item container" href="brands/Interlude Home/index.html">Bedroom</a>
-              <a class="dropdown-list-item container" href="brands/Interlude Home/index.html">Kitchen</a>
-              <a class="dropdown-list-item container" href="brands/Interlude Home/index.html">Office</a>
-              <a class="dropdown-list-item container" href="brands/Interlude Home/index.html">Dining Room</a>
             </div>
           </div>
         </div>
         <div class="nav-item">
           <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="nav-item">
+          <a href="about.html">About Us</a>
         </div>
       </div>
   </nav>
@@ -67,67 +54,8 @@
             <h4 class="my-5">Brands</h4>
     
             <div class="">
-               <div class="brands-list">
-                 <a href="brands/Alfonso/index.html" class="brand">
-                   <img src="" alt="" class="brand-image img-responsive">
-                   <div class="brand-name">
-                      <img src="assets/images/Alfonso-Marina.png" alt="" srcset="">
-                   </div>
-                  </a>
-                 <a href="brands/Baker/index.html" class="brand">
-                   <img src="" alt="" class="brand-image img-responsive">
-                   <div class="brand-name">
-                      <img src="assets/images/baker.jpg" alt="" srcset="">
-                   </div>
-                  </a>
-                 <a href="brands/Artistica/index.html" class="brand">
-                   <img src="" alt="" class="brand-image img-responsive">
-                   <div class="brand-name">
-                      <img src="assets/images/artistica.jpg" alt="" srcset="">
-                   </div>
-                  </a>
-                 <a href="brands/Interlude Home/index.html" class="brand">
-                   <img src="" alt="" class="brand-image img-responsive">
-                   <div class="brand-name">
-                      <img src="assets/images/interlude-home.png" alt="" srcset="">
-                   </div>
-                  </a>
-                 <a href="brands/Loloi/index.html" class="brand">
-                   <img src="" alt="" class="brand-image img-responsive">
-                   <div class="brand-name">
-                      <img src="assets/images/loiloi.jpg" alt="" srcset="">
-                   </div>
-                  </a>
-                 <a href="brands/Noir/index.html" class="brand">
-                   <img src="" alt="" class="brand-image img-responsive">
-                   <div class="brand-name">
-                      <img src="assets/images/Noir.png" alt="" srcset="">
-                   </div>
-                  </a>
-                 <a href="brands/Nuevo/index.html" class="brand">
-                   <img src="" alt="" class="brand-image img-responsive">
-                   <div class="brand-name">
-                      <img src="assets/images/nuevo.png" alt="" srcset="">
-                   </div>
-                  </a>
-                 <a href="brands/Trs/index.html" class="brand">
-                   <img src="" alt="" class="brand-image img-responsive">
-                   <div class="brand-name">
-                      <img src="assets/images/trs-furniture.jpg" alt="">
-                   </div>
-                  </a>
-                 <a href="brands/Knowlton/index.html" class="brand">
-                   <img src="" alt="" class="brand-image img-responsive">
-                   <div class="brand-name">
-                      <img src="assets/images/knowlton-bros.jpg" alt="">
-                   </div>
-                  </a>
-                 <a href="brands/WoodBridge/index.html" class="brand">
-                   <img src="" alt="" class="brand-image img-responsive">
-                   <div class="brand-name">
-                      <img src="assets/images/woodbridge furniture.jpg" alt="" srcset="">
-                   </div>
-                  </a>
+               <div id="brands-list" class="brands-list">
+                
                </div>
             </div>
 
@@ -143,15 +71,6 @@
                  and we're doing our part to help spread those values across the country and the world.</p>
               <div class="btn  bg-sec">Continue</div>
         </div>
-
-          <div class="container-fluid paralax-container-2 mb-5">
-            <h1>Decorate your home and office with <span class="color-primary">classic</span> Furnitures</h1>
-            <p>Born in an effort to protect the world’s rapidly disappearing wildlife habitats, Durable furnitire provides handcrafted, 
-              custom wood furniture that is made sustainably right here in Nigeria. 
-              We recognize and cherish Nigeria's strong values of craftsmanship and sustainability,
-               and we're doing our part to help spread those values across the country and the world.</p>
-            <div class="btn  bg-sec">Continue</div>
-          </div>
 
 
           <footer class="text-white text-center text-lg-start">
@@ -249,17 +168,25 @@
           </footer>
     <script>
 
-      // const nav = document.querySelector("nav");
+      const nav = document.querySelector("nav");
 
-      // window.addEventListener("scroll", (e) => {
-      //   if (window.scrollY > ( window.innerHeight - 50)){
-      //     nav.style.backgroundColor = "#0B0A0D"
-      //   }
-      // })
+      window.addEventListener("scroll", (e) => {
+        if (window.scrollY > ( window.innerHeight * (20/100))){
+          nav.style.backgroundColor = "#0B0A0D"
+        }else{
+          nav.style.backgroundColor = "transparent"
+        }
+      })
 
     </script>
-    <script src="assets/bootstrap/js/jquery-3.6.0.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+     <script src="assets/bootstrap/js/jquery-3.6.0.min.js"></script>
+     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+     <script src="scripts/data.js">
+     </script>
+     <script src="scripts/brands.js"></script>
+     <script>
+       displayBrands();
+     </script>
 </body>
 </html>

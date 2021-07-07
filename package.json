@@ -1,0 +1,24 @@
+{
+  "name": "durable",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kunbyy/Durable.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kunbyy/Durable/issues"
+  },
+  "homepage": "https://github.com/Kunbyy/Durable#readme",
+  "dependencies": {
+    "docx": "^6.0.3",
+    "file-saver": "^2.0.5"
+  }
+}

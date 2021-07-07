@@ -1,4 +1,18 @@
-const products = [
+const fs = require("fs");
+const https = require('https');
+const {
+    AlignmentType,
+    convertInchesToTwip,
+    Document,
+    HeadingLevel,
+    LevelFormat,
+    Packer,
+    Paragraph,
+    ImageRun,
+} = require("docx");
+
+
+var products = [
     {
         name : "Brighton Dining Set",
         brandName: "Alfonso",
@@ -30,13 +44,11 @@ const products = [
         img : "https://vermontwoodsstudios.com/bmz_cache/b/ba5a874994dc8b8db9efd809a9cd642d.image.745x745.jpg",
         description : "Looking for that unique table lamp that stands out from the rest? Well, look no further than our Hubbardton Forge hand-made Forged Leaves with Glass Table Lamp. A beautiful organic leaf design hand-forged in wrought iron are further enhanced by its soft warm glow from your choice of translucent glass and metal finish. Great for any room of your home."
     },
-
-    {
-        name : "Mobius Arc Floor Lamp",
-        brandName: "Baker",
-        img : "https://vermontwoodsstudios.com/bmz_cache/0/07d7d5aa9849a2385a66026d7959d6c4.image.745x745.jpg",
-        description : "Inspired by the fluted shape of a pristine calla lily bloom, our Mobius Arc Floor Lamp showcases a soft glowing shade that blossoms out of a long arching metal stem. Hand-forged by Hubbardton Forge artisans, this floor lamp is eye-catching in appearance while providing your space with a natural softness. Enjoy the graceful arching form of this designer floor lamp in the comfort of your own home."
-    },
+    {   name : "New York Contemporary Sofa Table",
+        brandName: "Alfonso",
+        img : "https://vermontwoodsstudios.com/bmz_cache/8/80b4a4de6f4c65f8dc6a8e44a0bf72f0.image.745x745.jpg",
+        description : "Our high end New York Contemporary Sofa Table features artistic flair with modern sensibilities. This unique piece provides a wonderful way to show off your treasures wherever you wish in style. It has a simple, modern design that will blend in perfectly in any contemporary or modern living room. Available in cherry, maple, oak and walnut hardwood. Choose a natural finish or select from our large variety of wood stains. This sofa table is made to order and built in Vermont using sustainably harvested woods."
+        }, 
 {
      name : "Taper Torchiere",
     brandName: "Baker",
@@ -197,3 +209,158 @@ const products = [
    description : "Our high end New York Contemporary Sofa Table features artistic flair with modern sensibilities. This unique piece provides a wonderful way to show off your treasures wherever you wish in style. It has a simple, modern design that will blend in perfectly in any contemporary or modern living room. Available in cherry, maple, oak and walnut hardwood. Choose a natural finish or select from our large variety of wood stains. This sofa table is made to order and built in Vermont using sustainably harvested woods."
 },            
 ]
+
+function getImage(url, callback) {
+    https.get(url, res => {
+        // Initialise an array
+        const bufs = [];
+
+        // Add the data to the buffer collection
+        res.on('data', function (chunk) {
+            bufs.push(chunk)
+        });
+
+        // This signifies the end of a request
+        res.on('end', function () {
+            // We can join all of the 'chunks' of the image together
+            const data = Buffer.concat(bufs).toString("base64");
+
+            // Then we can call our callback.
+            callback(null, data);
+        });
+    })
+    // Inform the callback of the error.
+    .on('error', callback);
+}
+
+
+products.forEach(async (product) => {
+    let image;
+
+    getImage(product.img, (err, data) => {
+        if (err) {
+            throw new Error(err);
+        }
+
+        // console.log("the image",data);
+        image = data;
+
+    })
+    const doc = new Document({
+        creator: "Durable Furnitures",
+        title: product.name,
+        description: "",
+        styles: {
+            default: {
+                heading1: {
+                    run: {
+                        size: 30,
+                        bold: true,
+                        color: "DE4121",
+                    },
+                    paragraph: {
+                        spacing: {
+                            after: 120,
+                        },
+                    },
+                },
+                heading2: {
+                    run: {
+                        size: 26,
+                        bold: true,
+                    },
+                    paragraph: {
+                        spacing: {
+                            before: 240,
+                            after: 120,
+                        },
+                    },
+                },
+                listParagraph: {
+                    run: {
+                        color: "#FF0000",
+                    },
+                },
+            },
+            paragraphStyles: [
+                {
+                    id: "aside",
+                    name: "Aside",
+                    basedOn: "Normal",
+                    next: "Normal",
+                    run: {
+                        color: "999999",
+                        italics: true,
+                    },
+                    paragraph: {
+                        indent: {
+                            left: convertInchesToTwip(0.5),
+                        },
+                        spacing: {
+                            line: 276,
+                        },
+                    },
+                },
+                {
+                    id: "wellSpaced",
+                    name: "Well Spaced",
+                    basedOn: "Normal",
+                    quickFormat: true,
+                    paragraph: {
+                        spacing: { line: 276, before: 20 * 72 * 0.1, after: 20 * 72 * 0.05 },
+                    },
+                },
+            ],
+        },
+        numbering: {
+            config: [
+                {
+                    reference: "my-crazy-numbering",
+                    levels: [
+                        {
+                            level: 0,
+                            format: LevelFormat.LOWER_LETTER,
+                            text: "%1)",
+                            alignment: AlignmentType.LEFT,
+                        },
+                    ],
+                },
+            ],
+        },
+        sections: [
+            {
+                children: [
+                    new Paragraph({
+                        text: "Durable Furnitures",
+                        heading: HeadingLevel.HEADING_1,
+                    }),
+                    new Paragraph(product.brandName),
+                    new Paragraph({
+                        text: product.name,
+                        heading: HeadingLevel.HEADING_2,
+                    }),
+                    new Paragraph({
+                        children: [
+                            new ImageRun({
+                                data: fs.readFileSync("./assets/images/alfonso.png").toString("base64"),
+                                transformation: {
+                                    width: 100,
+                                    height: 100,
+                                },
+                            }),
+                        ],
+                    }),
+                    new Paragraph({
+                        text: product.description,
+                        style: "wellSpaced",
+                    }),
+                ],
+            },
+        ],
+    });
+    
+    Packer.toBuffer(doc).then((buffer) => {
+        fs.writeFileSync(`${product.name}.docx`, buffer);
+    });
+})
+

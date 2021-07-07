@@ -9,6 +9,11 @@
 
 }
 
+
+img{
+    object-fit: cover;
+}
+
 .my-dropdown:hover .my-dropdown-container{
     display: block;
 }
@@ -54,11 +59,11 @@
 }
 
 .brand{
-    width: 200px;
+    width: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 200px;
+    height: 300px;
     border: .5px solid rgba(0, 0, 0, 0.171);
     margin: 10px;
     transition: all .5s;
@@ -98,6 +103,10 @@
     --secondary-200: #752212;
   }
 
+.contact-us-form{
+    background-color: #7523120a;
+    border-radius: 5%;
+}
 footer{
     background-color: #0B0A0D;
 }
@@ -338,4 +347,77 @@ nav .brand-name:hover{
 
 .hero-container p{
     width: 40%;
+}
+
+#productsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-basis: 25%;
+}
+
+.productsItem{
+    display: flex;
+    position: relative;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width: 300px !important;
+    height: 500px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #0b0a0d46;
+    width: 5px;
+}
+
+
+
+.productsItem img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: all;
+    transition-duration: .5s;
+}
+.productsItem img:hover{
+    transform: scale(1.05)
+}
+
+.productsItem h5{
+   padding: 10px;
+}
+
+.productsItem .container {
+    overflow-y: scroll;
+}
+
+.dBtn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    border-radius: 50%;
+    background-color: var(--primary-100);
+    border: none;
+}
+
+.dBtn:hover{
+    background-color: var(--primary-200);
+}
+
+.w-6{
+    width: 16px;
+}
+
+.h-6{
+    height: 16px;
 }
