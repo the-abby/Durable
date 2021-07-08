@@ -1,5 +1,7 @@
 const fs = require("fs");
 const https = require('https');
+const fetch = require("node-fetch");
+const request = require("request")
 const {
     AlignmentType,
     convertInchesToTwip,
@@ -8,7 +10,9 @@ const {
     LevelFormat,
     Packer,
     Paragraph,
+    WidthType,
     ImageRun,
+    HorizontalPositionAlign,
 } = require("docx");
 
 
@@ -210,42 +214,34 @@ var products = [
 },            
 ]
 
-function getImage(url, callback) {
-    https.get(url, res => {
-        // Initialise an array
-        const bufs = [];
+const getBuffer = async (url) => {
+    try {
+      const response = await fetch(url);
+      const arrayBuffer = await response.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+      return buffer;
+    } catch (error) {
+      return { error };
+    }
+  };
 
-        // Add the data to the buffer collection
-        res.on('data', function (chunk) {
-            bufs.push(chunk)
-        });
+async function getImage(url){
+    let myBuffer = null
+    await request({ url, encoding: null }, (err, resp, buffer) => {
+         // Use the buffer
+         // buffer contains the image data
+         // typeof buffer === 'object'
+         myBuffer = buffer;
+    });
 
-        // This signifies the end of a request
-        res.on('end', function () {
-            // We can join all of the 'chunks' of the image together
-            const data = Buffer.concat(bufs).toString("base64");
-
-            // Then we can call our callback.
-            callback(null, data);
-        });
-    })
-    // Inform the callback of the error.
-    .on('error', callback);
+    return myBuffer;
 }
 
 
 products.forEach(async (product) => {
     let image;
 
-    getImage(product.img, (err, data) => {
-        if (err) {
-            throw new Error(err);
-        }
-
-        // console.log("the image",data);
-        image = data;
-
-    })
+    image = await getBuffer(product.img);
     const doc = new Document({
         creator: "Durable Furnitures",
         title: product.name,
@@ -266,7 +262,7 @@ products.forEach(async (product) => {
                 },
                 heading2: {
                     run: {
-                        size: 26,
+                        size: 40,
                         bold: true,
                     },
                     paragraph: {
@@ -342,10 +338,10 @@ products.forEach(async (product) => {
                     new Paragraph({
                         children: [
                             new ImageRun({
-                                data: fs.readFileSync("./assets/images/alfonso.png").toString("base64"),
+                                data: image,
                                 transformation: {
-                                    width: 100,
-                                    height: 100,
+                                    width: 600,
+                                    height: 400,
                                 },
                             }),
                         ],

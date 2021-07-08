@@ -19,6 +19,8 @@
   "homepage": "https://github.com/Kunbyy/Durable#readme",
   "dependencies": {
     "docx": "^6.0.3",
-    "file-saver": "^2.0.5"
+    "file-saver": "^2.0.5",
+    "node-fetch": "^2.6.1",
+    "request": "^2.88.2"
   }
 }
