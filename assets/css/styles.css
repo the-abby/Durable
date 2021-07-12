@@ -137,7 +137,7 @@ body{
 
 header{
     width: 100vw;
-    height: max-content;
+    height: fit-content;
     position: relative;
     background-color: #302c2c;
     overflow: hidden;
@@ -193,7 +193,7 @@ header{
 
 @media screen and (max-width : 600px){
     header{
-        height: 75vh;
+        height: fit-content;
     }
 
     .nav-list{
@@ -420,4 +420,72 @@ nav .brand-name:hover{
 
 .h-6{
     height: 16px;
+}
+
+.w-8{
+    width: 24px;
+}
+
+.h-8{
+    height: 24px;
+}
+#menu-bar{
+    display: none;
+}
+@media (max-width : 768px) {
+    #menu-bar{
+        display: inline-block;
+        cursor: pointer;
+        position: absolute;
+        top: 25%;
+        right: 20px;
+        z-index: 9999;
+    }
+    #aside-bar{
+        overflow: hidden;
+        background-color: rgba(0, 0, 0, 0.719);
+        height: 100vh;
+        width: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        transition-property: width;
+        transition-duration:.4s;
+        transition-timing-function: ease-out;
+    }
+}
+
+#hamburger{
+    transition-property: all;
+    transition-duration:2s;
+    transition-timing-function: ease-out;
+}
+
+.aside-bar-container{
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.aside-bar-container .nav-item{
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 10%;
+    transition: background-color .5s;
+    margin-right: 10px;
+    border: none;
+    outline: none;
+}
+
+.aside-bar-container .nav-item a{
+    text-decoration: none;
+    color: white;
 }
