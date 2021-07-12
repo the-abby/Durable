@@ -3,7 +3,7 @@ A furniture website
 
 # Developer's Guide
 
-To generate .docx run the command
+To generate `.docx` run the command
 
 ```
   node index.js
