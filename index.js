@@ -187,7 +187,7 @@ var products = [
    img : "https://vermontwoodsstudios.com/images/living-room/corner-tv-media-console.jpg",
    description : "Our Corner TV-Media Stand is handmade in Vermont and can be customized for your flat screen TV size! Our solid hardwood is sustainably harvested making it a beautiful and responsible choice. This TV-Entertainment Center has a modern look, and will fit perfectly into any corner of your home!"
 },      
-{   name : "New York Contemporary TV Stand #1",
+{   name : "New York Contemporary TV Stand 1",
    brandName: "Noir",
    img : "https://vermontwoodsstudios.com/images/living-room/contemporary-tv-stand.jpg",
    description : "Our New York Contemporary TV Stand is perfect for housing flat screen TV's and all your other media equipment. It has a simple, modern design that will blend in perfectly in any contemporary living room."
