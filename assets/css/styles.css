@@ -432,7 +432,10 @@ nav .brand-name:hover{
 #menu-bar{
     display: none;
 }
-@media (max-width : 768px) {
+#aside-bar{
+    display: none;
+}
+@media screen and (max-width : 768px) {
     #menu-bar{
         display: inline-block;
         cursor: pointer;
